@@ -45,7 +45,7 @@
     "start": "craco start",
     "prebuild": "node scripts/generate-sitemap.js && cp public/images/logo.jpeg public/favicon.ico || true",
     "build": "GENERATE_SOURCEMAP=false craco build",
-    "postbuild": "node scripts/prerender.js",
+    "postbuild": "node scripts/prerender.js && node scripts/build-booth.js",
     "test": "craco test",
     "generate-og": "node scripts/generate-og-image.js"
   },

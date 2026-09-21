@@ -1,0 +1,10 @@
+const { execFileSync } = require('node:child_process');
+const { mkdirSync, cpSync } = require('node:fs');
+const path = require('node:path');
+const booth = path.resolve(__dirname, '../../booth-preview');
+const destination = path.resolve(__dirname, '../build/new/booth');
+const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+execFileSync(npm, ['ci', '--no-audit', '--no-fund'], { cwd: booth, stdio: 'inherit' });
+execFileSync(npm, ['run', 'build'], { cwd: booth, stdio: 'inherit' });
+mkdirSync(destination, { recursive: true });
+cpSync(path.join(booth, 'dist'), destination, { recursive: true });
